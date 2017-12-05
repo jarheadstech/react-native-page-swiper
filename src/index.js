@@ -7,18 +7,17 @@ import {
   PanResponder,
   View,
 } from 'react-native';
-import PropTypes from 'prop-types';
 
 import Dots from './dots';
 
 export default class Swiper extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequired,
-    index: PropTypes.number,
-    threshold: PropTypes.number,
-    pager: PropTypes.bool,
-    onPageChange: PropTypes.func,
-    activeDotColor: PropTypes.string,
+    children: React.PropTypes.node.isRequired,
+    index: React.PropTypes.number,
+    threshold: React.PropTypes.number,
+    pager: React.PropTypes.bool,
+    onPageChange: React.PropTypes.func,
+    activeDotColor: React.PropTypes.string,
   };
 
   static defaultProps = {
@@ -134,7 +133,7 @@ export default class Swiper extends Component {
           <Dots
             active={ this.state.index }
             activeColor={ this.props.activeDotColor }
-            style={ { position: 'absolute', bottom: 50, width: this.state.viewWidth } }
+            style={ { position: 'absolute', bottom: 10, width: this.state.viewWidth } }
             total={ this.props.children.length }
           /> }
       </View>
