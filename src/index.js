@@ -1,32 +1,13 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 import React, { Component } from 'react';
-import {
-  Animated,
-  Dimensions,
-  PanResponder,
-  View,
-} from 'react-native';
+import { Animated, Dimensions, PanResponder, View } from 'react-native';
 
 import Dots from './dots';
 
 export default class Swiper extends Component {
-  static propTypes = {
-    children: React.PropTypes.node.isRequired,
-    index: React.PropTypes.number,
-    threshold: React.PropTypes.number,
-    pager: React.PropTypes.bool,
-    onPageChange: React.PropTypes.func,
-    activeDotColor: React.PropTypes.string,
-  };
-
-  static defaultProps = {
-    index: 0,
-    pager: true,
-    threshold: 25,
-    onPageChange: () => {},
-    activeDotColor: 'blue',
-  };
 
   constructor(props) {
     super(props);
@@ -34,7 +15,7 @@ export default class Swiper extends Component {
     this.state = {
       index: props.index,
       scrollValue: new Animated.Value(props.index),
-      viewWidth: Dimensions.get('window').width,
+      viewWidth: Dimensions.get('window').width
     };
   }
 
@@ -45,9 +26,9 @@ export default class Swiper extends Component {
 
       let newIndex = this.state.index;
 
-      if (relativeGestureDistance < -0.5 || (relativeGestureDistance < 0 && vx <= -0.5)) {
+      if (relativeGestureDistance < -0.5 || relativeGestureDistance < 0 && vx <= -0.5) {
         newIndex = newIndex + 1;
-      } else if (relativeGestureDistance > 0.5 || (relativeGestureDistance > 0 && vx >= 0.5)) {
+      } else if (relativeGestureDistance > 0.5 || relativeGestureDistance > 0 && vx >= 0.5) {
         newIndex = newIndex - 1;
       }
 
@@ -67,13 +48,11 @@ export default class Swiper extends Component {
         if (threshold - Math.abs(gestureState.dx) > 0) {
           return false;
         }
-
       },
 
       // Touch is released, scroll to the one that you're closest to
       onPanResponderRelease: release,
       onPanResponderTerminate: release,
-
 
       // Dragging, move the view with the touch
       onPanResponderMove: (e, gestureState) => {
@@ -117,26 +96,40 @@ export default class Swiper extends Component {
     const sceneContainerStyle = {
       width: this.state.viewWidth * this.props.children.length,
       flex: 1,
-      flexDirection: 'row',
+      flexDirection: 'row'
     };
 
-    return (
-      <View onLayout={ this.handleLayout.bind(this) } style={ { flex: 1, overflow: 'hidden' } }>
-        <Animated.View
-          {...this._panResponder.panHandlers}
-          style={ [sceneContainerStyle, { transform: [{ translateX }] }] }
-        >
-          { scenes }
-        </Animated.View>
-
-        { this.props.pager &&
-          <Dots
-            active={ this.state.index }
-            activeColor={ this.props.activeDotColor }
-            style={ { position: 'absolute', bottom: 50, width: this.state.viewWidth } }
-            total={ this.props.children.length }
-          /> }
-      </View>
+    return React.createElement(
+      View,
+      { style: { flex: 1, overflow: 'hidden' }, onLayout: this.handleLayout.bind(this) },
+      React.createElement(
+        Animated.View,
+        _extends({}, this._panResponder.panHandlers, {
+          style: [sceneContainerStyle, { transform: [{ translateX }] }]
+        }),
+        scenes
+      ),
+      this.props.pager && React.createElement(Dots, {
+        active: this.state.index,
+        activeColor: this.props.activeDotColor,
+        total: this.props.children.length,
+        style: { position: 'absolute', bottom: 10, width: this.state.viewWidth }
+      })
     );
   }
 }
+Swiper.propTypes = {
+  children: React.PropTypes.node.isRequired,
+  index: React.PropTypes.number,
+  threshold: React.PropTypes.number,
+  pager: React.PropTypes.bool,
+  onPageChange: React.PropTypes.func,
+  activeDotColor: React.PropTypes.string
+};
+Swiper.defaultProps = {
+  index: 0,
+  pager: true,
+  threshold: 25,
+  onPageChange: () => {},
+  activeDotColor: 'blue'
+};
