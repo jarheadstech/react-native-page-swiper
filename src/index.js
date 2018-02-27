@@ -133,7 +133,7 @@ export default class Swiper extends Component {
           <Dots
             active={ this.state.index }
             activeColor={ this.props.activeDotColor }
-            style={ { position: 'absolute', bottom: 10, width: this.state.viewWidth } }
+            style={ { position: 'absolute', bottom: 50, width: this.state.viewWidth } }
             total={ this.props.children.length }
           /> }
       </View>

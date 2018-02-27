@@ -22,8 +22,9 @@ export default class Dot extends Component {
       <View
         style={ [{
           backgroundColor: color,
-          width: 15,
-          height: 3,
+          width: diameter,
+          height: diameter,
+          borderRadius: diameter / 2,
           marginLeft: 3,
           marginRight: 3,
           marginTop: 3,
