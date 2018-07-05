@@ -3,8 +3,8 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 import React, { Component } from 'react';
-import { Animated, Dimensions, PanResponder, View } from 'react-native';
-
+import { Animated, Dimensions, PanResponder, View, ViewPropTypes} from 'react-native';
+import PropTypes from 'prop-types';
 import Dots from './dots';
 
 export default class Swiper extends Component {
@@ -119,12 +119,12 @@ export default class Swiper extends Component {
   }
 }
 Swiper.propTypes = {
-  children: React.PropTypes.node.isRequired,
-  index: React.PropTypes.number,
-  threshold: React.PropTypes.number,
-  pager: React.PropTypes.bool,
-  onPageChange: React.PropTypes.func,
-  activeDotColor: React.PropTypes.string
+  children: PropTypes.node.isRequired,
+  index: PropTypes.number,
+  threshold: PropTypes.number,
+  pager: PropTypes.bool,
+  onPageChange: PropTypes.func,
+  activeDotColor: PropTypes.string,
 };
 Swiper.defaultProps = {
   index: 0,

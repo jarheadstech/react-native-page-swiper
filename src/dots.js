@@ -1,8 +1,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-
+import { StyleSheet, View, ViewPropTypes} from 'react-native';
+import PropTypes from 'prop-types';
 import Dot from './dot';
 
 export default class Dots extends Component {
@@ -26,10 +26,10 @@ export default class Dots extends Component {
 }
 
 Dots.propTypes = {
-  total: React.PropTypes.number,
-  active: React.PropTypes.number,
-  style: View.propTypes.style
-};
+  total: PropTypes.number,
+    active: PropTypes.number,
+    style: ViewPropTypes.style,
+  };
 Dots.defaultProps = {
   total: 0,
   active: -1
